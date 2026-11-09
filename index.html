@@ -1,0 +1,183 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Matching Game</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eaf2ff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .game-container {
+            width: 100%;
+            max-width: 650px;
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #294b8f;
+            margin-bottom: 10px;
+        }
+
+        .instructions {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .game-info {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 25px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #294b8f;
+        }
+
+        /* 12 CARDS: 4 COLUMNS AND 3 ROWS */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(3, 110px);
+            gap: 12px;
+        }
+
+        .card {
+            background-color: #4776d0;
+            color: white;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            background-color: #3159a8;
+            transform: scale(1.05);
+        }
+
+        .card.flipped,
+        .card.matched {
+            background-color: #dce8ff;
+            color: #294b8f;
+        }
+
+        .card.matched {
+            border: 2px solid #4caf50;
+        }
+
+        .restart-btn {
+            margin-top: 25px;
+            padding: 12px 30px;
+            background-color: #294b8f;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .restart-btn:hover {
+            background-color: #1b3568;
+        }
+
+        /* RESPONSIVE LAYOUT */
+        @media (max-width: 480px) {
+            .game-container {
+                padding: 18px;
+            }
+
+            .card-grid {
+                grid-template-rows: repeat(3, 80px);
+                gap: 8px;
+            }
+
+            .card {
+                font-size: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="game-container">
+
+        <h1>Memory Matching Game</h1>
+
+        <p class="instructions">
+            Find and match all 6 pairs of identical cards!
+        </p>
+
+        <!-- GAME INFORMATION -->
+        <div class="game-info">
+            <p>Moves: <span id="moves">0</span></p>
+            <p>Matches: <span id="matches">0/6</span></p>
+        </div>
+
+        <!-- 12 MEMORY CARDS -->
+        <div class="card-grid" id="cardGrid">
+
+            <div class="card">?</div>
+            <div class="card">?</div>
+            <div class="card">?</div>
+            <div class="card">?</div>
+
+            <div class="card">?</div>
+            <div class="card">?</div>
+            <div class="card">?</div>
+            <div class="card">?</div>
+
+            <div class="card">?</div>
+            <div class="card">?</div>
+            <div class="card">?</div>
+            <div class="card">?</div>
+
+        </div>
+
+        <!-- RESTART BUTTON -->
+        <button class="restart-btn" onclick="restartGame()">
+            Restart Game
+        </button>
+
+    </div>
+
+    <script>
+        function restartGame() {
+            document.getElementById("moves").textContent = 0;
+            document.getElementById("matches").textContent = "0/6";
+
+            const cards = document.querySelectorAll(".card");
+
+            cards.forEach(card => {
+                card.textContent = "?";
+                card.classList.remove("flipped", "matched");
+            });
+        }
+    </script>
+
+</body>
+</html>
+
