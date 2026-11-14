@@ -164,19 +164,7 @@
 
     </div>
 
-    <script>
-        function restartGame() {
-            document.getElementById("moves").textContent = 0;
-            document.getElementById("matches").textContent = "0/6";
-
-            const cards = document.querySelectorAll(".card");
-
-            cards.forEach(card => {
-                card.textContent = "?";
-                card.classList.remove("flipped", "matched");
-            });
-        }
-    </script>
+    <script src="js/game.js"></script>
 
 </body>
 </html>
